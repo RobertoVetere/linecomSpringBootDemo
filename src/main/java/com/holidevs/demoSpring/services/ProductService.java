@@ -47,13 +47,11 @@ public class ProductService implements ProductServiceInterface {
     @Override
     public Product updateProduct(Product product) {
         try {
-            // Buscamos el producto existente por su ID
             Optional<Product> existingProductOptional = productRepository.findById(product.getId());
 
             if (existingProductOptional.isPresent()) {
                 Product existingProduct = existingProductOptional.get();
 
-                // Verificamos si cada campo debe ser actualizado y, en caso afirmativo, lo actualizamos
                 if (product.getName() != null) {
                     existingProduct.setName(product.getName());
                 }
@@ -77,7 +75,7 @@ public class ProductService implements ProductServiceInterface {
 
                 return existingProduct;
             } else {
-                // Manejar el caso en el que no se encuentre el producto con el ID especificado
+                // TODO: Implementar un manejo personalizado de excepciones
                 throw new RuntimeException("Producto no encontrado con ID: " + product.getId());
             }
         } catch (Exception e) {
@@ -100,7 +98,7 @@ public class ProductService implements ProductServiceInterface {
 
     @Override
     public List<Product> findByCategory(Category category) {
-        return null;
+        return productRepository.findByCategory(category);
     }
 
     @Override
