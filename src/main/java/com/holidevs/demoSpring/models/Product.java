@@ -1,5 +1,6 @@
 package com.holidevs.demoSpring.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -25,7 +26,8 @@ public class Product {
 
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private final Date createAt = new Date(System.currentTimeMillis());
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -50,7 +52,6 @@ public class Product {
         this.price = price;
         this.status = status;
         this.category = category;
-        this.createAt = new Date();
     }
 
     public Long getId() {

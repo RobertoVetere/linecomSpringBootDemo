@@ -1,27 +1,24 @@
 package com.holidevs.demoSpring.dto;
 
-import com.holidevs.demoSpring.models.Category;
-
 import java.util.Date;
-
 public class ProductDto {
 
-    private Long id;
+    private final Long id;
     private String name;
     private String description;
     private Double stock;
     private Double price;
     private String status;
-    private Date createAt;
+    private final Date createAtDto;
 
-    public ProductDto(Long id, String name, String description, Double stock, Double price, String status, Date createAt) {
+    public ProductDto(Long id, String name, String description, Double stock, Double price, String status, Date createAtDto) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.stock = stock;
         this.price = price;
         this.status = status;
-        this.createAt = createAt;
+        this.createAtDto = createAtDto;
     }
 
     public Long getId() {
@@ -68,9 +65,7 @@ public class ProductDto {
         this.status = status;
     }
 
-
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public Date getCreateAtDto() {
+        return createAtDto;
     }
-
 }
