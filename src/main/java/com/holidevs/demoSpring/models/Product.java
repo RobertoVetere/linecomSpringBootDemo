@@ -3,6 +3,7 @@ package com.holidevs.demoSpring.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -25,9 +26,8 @@ public class Product {
     private String status;
 
     @Column(name = "create_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private final Date createAt = new Date(System.currentTimeMillis());
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private final LocalDate createAt = LocalDate.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -78,7 +78,7 @@ public class Product {
         return status;
     }
 
-    public Date getCreateAt() {
+    public LocalDate getCreateAt() {
         return createAt;
     }
 

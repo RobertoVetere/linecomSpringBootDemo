@@ -1,5 +1,6 @@
 package com.holidevs.demoSpring.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 public class ProductDto {
 
@@ -9,9 +10,9 @@ public class ProductDto {
     private Double stock;
     private Double price;
     private String status;
-    private final Date createAtDto;
+    private final LocalDate createAtDto;
 
-    public ProductDto(Long id, String name, String description, Double stock, Double price, String status, Date createAtDto) {
+    public ProductDto(Long id, String name, String description, Double stock, Double price, String status, LocalDate createAtDto) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -65,7 +66,7 @@ public class ProductDto {
         this.status = status;
     }
 
-    public Date getCreateAtDto() {
+    public LocalDate getCreateAtDto() {
         return createAtDto;
     }
 }
