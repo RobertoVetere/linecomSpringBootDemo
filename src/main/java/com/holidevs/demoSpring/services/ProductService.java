@@ -1,9 +1,11 @@
 package com.holidevs.demoSpring.services;
 
+import com.holidevs.demoSpring.dto.ProductDto;
 import com.holidevs.demoSpring.models.Category;
 import com.holidevs.demoSpring.models.Product;
 import com.holidevs.demoSpring.repositories.ProductRepository;
 import com.holidevs.demoSpring.services.interfaces.ProductServiceInterface;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,10 +23,24 @@ public class ProductService implements ProductServiceInterface {
     @Override
     public List<Product> listAllProducts() {return productRepository.findAll();}
 
-    public Product getProduct(Long id) {
+    @Transactional
+    public ProductDto getProduct(Long id) {
         try {
-            return productRepository.findById(id)
+            Product product = productRepository.findById(id)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with id " + id + " not found"));
+
+            // Convierte Product a ProductDto con todos los atributos
+            ProductDto productDto = new ProductDto(
+                    product.getId(),
+                    product.getName(),
+                    product.getDescription(),
+                    product.getStock(),
+                    product.getPrice(),
+                    product.getStatus(),
+                    product.getCreateAt()
+            );
+
+            return productDto;
         } catch (Exception ex) {
             throw new RuntimeException("An error occurred while fetching the product with id " + id, ex);
         }

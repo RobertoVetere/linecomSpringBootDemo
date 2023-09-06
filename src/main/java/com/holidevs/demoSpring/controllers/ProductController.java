@@ -1,10 +1,9 @@
 package com.holidevs.demoSpring.controllers;
 
-import com.holidevs.demoSpring.models.Greeting;
-import com.holidevs.demoSpring.models.Product;
+import com.holidevs.demoSpring.dto.ProductDto;
 import com.holidevs.demoSpring.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +14,8 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable Long id) {
-        Product product = productService.getProduct(id);
-        return ResponseEntity.ok(product);
+    @ResponseStatus(HttpStatus.OK)
+    public ProductDto getProduct(@PathVariable Long id) {
+        return productService.getProduct(id);
     }
 }

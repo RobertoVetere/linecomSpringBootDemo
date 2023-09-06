@@ -19,5 +19,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     void delete(Product product);
 
-    Product update(Optional<Product> product);
 }

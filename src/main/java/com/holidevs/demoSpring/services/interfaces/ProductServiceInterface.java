@@ -1,5 +1,6 @@
 package com.holidevs.demoSpring.services.interfaces;
 
+import com.holidevs.demoSpring.dto.ProductDto;
 import com.holidevs.demoSpring.models.Category;
 import com.holidevs.demoSpring.models.Product;
 
@@ -8,7 +9,7 @@ import java.util.Optional;
 
 public interface ProductServiceInterface {
     public List<Product> listAllProducts();
-    public Product getProduct(Long id);
+    public ProductDto getProduct(Long id);
     public Product createProduct(Product product);
     public Product updateProduct(Product product);
     public Product removeProduct(Product product);

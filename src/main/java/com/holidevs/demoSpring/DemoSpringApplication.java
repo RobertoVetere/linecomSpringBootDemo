@@ -30,7 +30,7 @@ public class DemoSpringApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception{
-		/*
+
 		Category shoes = new Category("shoes");
 		Category books = new Category("books");
 		Category electronics = new Category("electronics");
@@ -66,12 +66,11 @@ public class DemoSpringApplication implements CommandLineRunner {
 			product.setStock(stock);
 			product.setPrice(price);
 			product.setStatus(status);
-			product.setCreateAt(new Date());
 
 			product.setCategory(category);
 
 			productRepository.save(product);
-			 */
+
 		}
 	}
 
