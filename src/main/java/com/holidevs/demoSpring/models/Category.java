@@ -1,5 +1,6 @@
 package com.holidevs.demoSpring.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ public class Category {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Product> productList = new ArrayList<>();
 
     public Category() {

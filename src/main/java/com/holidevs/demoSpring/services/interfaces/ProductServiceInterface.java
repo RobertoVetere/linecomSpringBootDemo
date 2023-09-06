@@ -12,7 +12,7 @@ public interface ProductServiceInterface {
     public ProductDto getProduct(Long id);
     public Product createProduct(Product product);
     public Product updateProduct(Product product);
-    public Product removeProduct(Product product);
+    public String removeProduct(Long id);
     public List<Product> findByCategory(Category category);
     public Optional<Product> updateStock(Long id, Double quantity);
 }

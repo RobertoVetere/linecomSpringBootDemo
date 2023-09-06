@@ -4,15 +4,11 @@ import com.holidevs.demoSpring.models.Category;
 import com.holidevs.demoSpring.models.Product;
 import com.holidevs.demoSpring.repositories.CategoryRepository;
 import com.holidevs.demoSpring.repositories.ProductRepository;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @SpringBootApplication
 public class DemoSpringApplication implements CommandLineRunner {

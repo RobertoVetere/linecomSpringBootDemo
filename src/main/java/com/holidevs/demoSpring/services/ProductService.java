@@ -46,6 +46,7 @@ public class ProductService implements ProductServiceInterface {
         }
     }
 
+    @Override
     public Product createProduct(Product product) {
         try {
             //TODO: logica de negocio y validaciones
@@ -101,11 +102,19 @@ public class ProductService implements ProductServiceInterface {
     }
 
     @Override
-    public Product removeProduct(Product product) {
+    public String removeProduct(Long id) {
         try {
-            //TODO logica de negocio y validaciones
-            productRepository.delete(product);
-            return product;
+            Optional<Product> existingProductOptional = productRepository.findById(id);
+            if (existingProductOptional.isPresent())
+            {
+                //TODO logica de negocio y validaciones
+                productRepository.delete(existingProductOptional.get());
+                return "El producto con id: " + id + " " + existingProductOptional.get().getName() + " ha sido eliminado";
+            }
+            else {
+                throw new RuntimeException("El producto " + id + " no existe!");
+            }
+
         }catch (Exception e){
             //TODO implementar manejo personalizado de excepciones
             throw new RuntimeException("Error al eliminar el producto." + e.getMessage());
