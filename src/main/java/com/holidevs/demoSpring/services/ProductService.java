@@ -32,25 +32,57 @@ public class ProductService implements ProductServiceInterface {
 
     public Product createProduct(Product product) {
         try {
-            //TODO logica de negocio y validaciones
-            productRepository.save(product);
-            return product;
+            //TODO: logica de negocio y validaciones
+            Product newProduct = new Product(product.getName(),product.getDescription(),product.getStock(),
+                    product.getPrice(),product.getStatus(),product.getCategory());
+            productRepository.save(newProduct);
+            return newProduct;
         } catch (Exception e) {// Aquí puedes personalizar la gestión de la excepción.
             //TODO implementar manejo personalizado de excepciones
             //throw new ProductCreationException("Error al crear el producto.");
-            throw new RuntimeException("Error al crear el producto." + e);
+            throw new RuntimeException("Error al crear el producto." + e.getMessage());
         }
     }
 
     @Override
     public Product updateProduct(Product product) {
         try {
-            //TODO logica de negocio y validaciones
-            productRepository.save(product);
-            return product;
-        }catch (Exception e){
-            //TODO implementar manejo personalizado de excepciones
-            throw new RuntimeException("Error al actualiar el producto." + e);
+            // Buscamos el producto existente por su ID
+            Optional<Product> existingProductOptional = productRepository.findById(product.getId());
+
+            if (existingProductOptional.isPresent()) {
+                Product existingProduct = existingProductOptional.get();
+
+                // Verificamos si cada campo debe ser actualizado y, en caso afirmativo, lo actualizamos
+                if (product.getName() != null) {
+                    existingProduct.setName(product.getName());
+                }
+                if (product.getDescription() != null) {
+                    existingProduct.setDescription(product.getDescription());
+                }
+                if (product.getStock() != null) {
+                    existingProduct.setStock(product.getStock());
+                }
+                if (product.getPrice() != null) {
+                    existingProduct.setPrice(product.getPrice());
+                }
+                if (product.getStatus() != null) {
+                    existingProduct.setStatus(product.getStatus());
+                }
+                if (product.getCategory() != null) {
+                    existingProduct.setCategory(product.getCategory());
+                }
+
+                productRepository.save(existingProduct);
+
+                return existingProduct;
+            } else {
+                // Manejar el caso en el que no se encuentre el producto con el ID especificado
+                throw new RuntimeException("Producto no encontrado con ID: " + product.getId());
+            }
+        } catch (Exception e) {
+            // TODO: Implementar un manejo personalizado de excepciones
+            throw new RuntimeException("Error al actualizar el producto: " + e.getMessage());
         }
     }
 
@@ -62,7 +94,7 @@ public class ProductService implements ProductServiceInterface {
             return product;
         }catch (Exception e){
             //TODO implementar manejo personalizado de excepciones
-            throw new RuntimeException("Error al eliminar el producto." + e);
+            throw new RuntimeException("Error al eliminar el producto." + e.getMessage());
         }
     }
 
@@ -91,5 +123,4 @@ public class ProductService implements ProductServiceInterface {
             throw new RuntimeException("Error al actualizar el producto: " + e.getMessage());
         }
     }
-
 }
